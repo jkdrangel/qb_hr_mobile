@@ -1,8 +1,8 @@
 /**
  * Action to toggle search screen for offers
  */
-export const toggleSearch = () =>{
+export const toggleSearch = () => {
 
-}
+};
 
-//include additional actions here
+// include additional actions here
