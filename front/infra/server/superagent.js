@@ -1,55 +1,55 @@
-import superagentPromise from "superagent-promise";
-import _superagent from "superagent";
-import store from "../core/store";
+import superagentPromise from 'superagent-promise';
+import _superagent from 'superagent';
+import store from '../core/store';
 
-const props = require("./server.json");
+const props = require('./server.json');
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
 // const encode = encodeURIComponent;
-const responseBody = res => {
+const responseBody = (res) => 
   //TODO: mark ajax end
-  return res.body;
-};
+   res.body
+;
 
-const failure = error => {
-  //TODO: mark ajax end
-  //TODO: handle notification error
+const failure = (error) => {
+  // TODO: mark ajax end
+  // TODO: handle notification error
   console.error(error);
   return error;
 };
 
-const tokenPlugin = req => {
+const tokenPlugin = (req) => {
   const state = store.getState();
-  //TODO: set bearer jwt token
-  //TODO: mark ajax begin
+  // TODO: set bearer jwt token
+  // TODO: mark ajax begin
 };
 
 const Api = () => {
-  var env = process.env.NODE_ENV;
-  return env === "development" ? props.dev : props.prod;
+  const env = process.env.NODE_ENV;
+  return env === 'development' ? props.dev : props.prod;
 };
 
 const requests = {
-  del:async url =>
-    await superagent.del(`${Api()}${url}`)
+  del: async url =>
+    superagent.del(`${Api()}${url}`)
       .use(tokenPlugin)
       .then(responseBody)
       .catch(failure),
   get: async url =>
-    await superagent
+    superagent
       .get(`${Api()}${url}`)
       .use(tokenPlugin)
       .then(responseBody)
       .catch(failure),
   put: async (url, body) =>
-    await superagent
+    superagent
       .put(`${Api()}${url}`, body)
       .use(tokenPlugin)
       .then(responseBody)
       .catch(failure),
   post: async (url, body) =>
-  await superagent
+    superagent
       .post(`${Api()}${url}`, body)
       .use(tokenPlugin)
       .then(responseBody)
@@ -57,8 +57,8 @@ const requests = {
 };
 
 const Offer = {
-  list: async () => await requests.get("offer"),
-  detail: async offerId => await requests.get(`offer/${offerId}`)
+  list: async () => requests.get('offer'),
+  detail: async offerId => requests.get(`offer/${offerId}`)
 };
 
 const Course = {};
