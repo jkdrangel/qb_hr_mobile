@@ -9,6 +9,9 @@
       "react",
       "react-native"
     ],
+    "settings": {
+      "import/resolver": "reactnative"      
+    },
     "rules": {
       "class-methods-use-this": "off",
       "no-plusplus": "off",
